@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { containsNumber } from '../../Functions/ContainsNumber'
-import { containsSymbol } from '../../Functions/ContainsSymbol'
 import { Header } from 'semantic-ui-react'
 
+// helper functions 
+import { containsNumber } from '../../Functions/ContainsNumber'
+import { containsSymbol } from '../../Functions/ContainsSymbol'
+import { containsUpperCase } from '../../Functions/ConatinsUpperCase'
+
+// hints for the password, e.g. should contain uppercases
 class Hints extends Component {
     constructor(props){
         super(props)
@@ -28,7 +32,13 @@ class Hints extends Component {
                 </Header>
             )
         }
-
+        if(!containsUpperCase(password)){
+            hintsRender.push(
+                <Header key='conatinsUpperCase' style={{fontSize: '1.5em'}} inverted color={this.props.color} >
+                    Include an Upper Case Letter
+                </Header>
+            )
+        }
         return hintsRender
     }
 

@@ -12,6 +12,7 @@ import { BounceInUpDiv } from '../../Animations/BounceInUp'
 import { calculateEntropy } from '../../Functions/CalculateEntropy'
 import { claculateTimeToCrack } from '../../Functions/ClaculateTimeToCrack'
 
+// password meter, contains the meter for disaplying the entropy of a password
 class PasswordMeter extends Component {
     constructor(props){
         super(props)
@@ -57,17 +58,22 @@ class PasswordMeter extends Component {
 
         return (
             <div style={{width: '100%'}}>
-                {/* input a password */}
+                {/* animation */}
                 <BounceInLeftDiv style={{animationDelay: "0.6s", animationFillMode: 'both'}}>
+                
+                {/* input a password */}
                     <Segment input inverted padded>
                         <input type='text' onChange={this.handleChange} placeholder='Enter a Password...' />
                     </Segment>
+                
                 </BounceInLeftDiv>
 
                 {/* spacing */}
                 <br />
 
+                {/* animation */}
                 <BounceInUpDiv style={{animationDuration: "1.2s", animationDelay: "0.8s", animationFillMode: 'both'}}>
+
                     {/* progress bar to show the cureent strength */}
                     <Progress
                         color={this.state.color}
@@ -92,6 +98,7 @@ class PasswordMeter extends Component {
                     <Header style={{fontSize: '2em'}} inverted color='red' >
                         This would take: {this.state.timeToCrack} for an attacker to crack
                     </Header>
+
                 </BounceInUpDiv>
             </div>
 

@@ -1,3 +1,4 @@
+// returns true if the input contains a symbol
 export function containsSymbol(input_string) {
     if(!input_string){
         return false

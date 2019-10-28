@@ -1,8 +1,8 @@
 // returns true if the string contains a number
-export function containsNumber(input_string) {
+export function containsUpperCase(input_string) {
     if(!input_string){
         return false
     }
-    var patt = new RegExp("[0-9]", "g");
+    var patt = new RegExp("[A-Z]", "g");
     return patt.test(input_string);
 }
