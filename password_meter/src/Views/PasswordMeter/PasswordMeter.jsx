@@ -5,6 +5,8 @@ import WordEntropy from "./WordEntropy"
 
 // styling
 import './passwordMeter.css'
+import { BounceInLeftDiv } from '../../Animations/BounceInLeft'
+import { BounceInUpDiv } from '../../Animations/BounceInUp'
 
 // functions we need to implement
 import { calculateEntropy } from '../../Functions/CalculateEntropy'
@@ -56,34 +58,41 @@ class PasswordMeter extends Component {
         return (
             <div style={{width: '100%'}}>
                 {/* input a password */}
-                <Segment input inverted padded>
-                    <input type='text' onChange={this.handleChange} placeholder='Enter a Password...' />
-                </Segment>
+                <BounceInLeftDiv style={{animationDelay: "0.6s", animationFillMode: 'both'}}>
+                    <Segment input inverted padded>
+                        <input type='text' onChange={this.handleChange} placeholder='Enter a Password...' />
+                    </Segment>
+                </BounceInLeftDiv>
 
-                {/* progress bar to show the cureent strength */}
-                <Progress
-                    color={this.state.color}
-                    percent={this.state.entropy}
-                    inverted 
-                    style={{margin: 'auto', width: '40%'}}
-                    size='big'
-                >
-                    <WordEntropy color={this.state.color} entropy={this.state.entropy} />
-                </Progress>
-                
                 {/* spacing */}
                 <br />
 
-                {/* Hints for better password */}
-                <Header style={{fontSize: '2em'}} inverted color='blue' >
-                    Enhance your password by:
-                </Header>
-                <Hints color='blue' password={this.state.password} />
-                
-                {/* time to crack password */}
-                <Header style={{fontSize: '2em'}} inverted color='red' >
-                    This would take: {this.state.timeToCrack} for an attacker to crack
-                </Header>
+                <BounceInUpDiv style={{animationDuration: "1.2s", animationDelay: "0.8s", animationFillMode: 'both'}}>
+                    {/* progress bar to show the cureent strength */}
+                    <Progress
+                        color={this.state.color}
+                        percent={this.state.entropy}
+                        inverted 
+                        style={{margin: 'auto', width: '40%'}}
+                        size='big'
+                    >
+                        <WordEntropy color={this.state.color} entropy={this.state.entropy} />
+                    </Progress>
+                    
+                    {/* spacing */}
+                    <br />
+
+                    {/* Hints for better password */}
+                    <Header style={{fontSize: '2em'}} inverted color='blue' >
+                        Enhance your password by:
+                    </Header>
+                    <Hints color='blue' password={this.state.password} />
+                    
+                    {/* time to crack password */}
+                    <Header style={{fontSize: '2em'}} inverted color='red' >
+                        This would take: {this.state.timeToCrack} for an attacker to crack
+                    </Header>
+                </BounceInUpDiv>
             </div>
 
         )
