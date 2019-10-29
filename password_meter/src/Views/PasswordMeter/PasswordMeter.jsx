@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Progress, Segment, Header } from 'semantic-ui-react'
+import { FaEyeSlash, FaEye } from 'react-icons/fa';
+
 import Hints from './Hints'
 import WordEntropy from "./WordEntropy"
 
@@ -22,7 +24,9 @@ class PasswordMeter extends Component {
             valueToColor: {red: 0, yellow: 20, green: 80 }, // for red colour entropy has to be greater than 0, yellow greater than 20, etc.
             timeToCrack: "10 Seconds",                      //time it takes to crack the password                       
             hints: {symbol: false, upperCase: false, number: false}, //hints to make a stronger password
-            color: 'grey'   //color of entropy, grey means no input
+            color: 'grey',   //color of entropy, grey means no input
+            hiddenPassword: true,
+            inputType: 'password'
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -54,6 +58,16 @@ class PasswordMeter extends Component {
         return 'grey'
     }
 
+    renderEye(floatPosition){
+        if(this.state.hiddenPassword){
+            if(this.state.inputType == 'text') this.setState({inputType: 'password'})
+            return <FaEyeSlash style={{float: floatPosition}} onClick={() => this.setState({hiddenPassword: false})}  size='8em' />
+        }else{
+            if(this.state.inputType == 'password') this.setState({inputType: 'text'})
+            return <FaEye style={{float: floatPosition}} onClick={() => this.setState({hiddenPassword: true})}  size='8em' />
+        }
+    }
+
     render () {
 
         return (
@@ -62,8 +76,11 @@ class PasswordMeter extends Component {
                 <BounceInLeftDiv style={{animationDelay: "0.6s", animationFillMode: 'both'}}>
                 
                 {/* input a password */}
-                    <Segment input inverted padded>
-                        <input type='text' onChange={this.handleChange} placeholder='Enter a Password...' />
+                    <Segment style={{paddingTop: '-10px', marginTop: '-15px'}} input inverted padded>
+                        {this.renderEye('left')}
+                        <input style={{width: '70%'}} type={this.state.inputType} onChange={this.handleChange} placeholder='Enter a Password...' />
+                        
+                        {this.renderEye('right')}
                     </Segment>
                 
                 </BounceInLeftDiv>
